@@ -1,0 +1,141 @@
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.sql.*;
+
+public class AddRoom extends JFrame {
+
+	JPanel contentPane;
+	JTextField t2, t4;
+	JComboBox comboBox, comboBox_2, comboBox_3;
+	JButton b1, b2;
+	Choice c1;
+	Statement st;
+
+	public AddRoom() {
+		setBounds(450, 200, 1000, 450);
+		contentPane = new JPanel();
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+
+		ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/twelve.jpg"));
+		Image i3 = i1.getImage().getScaledInstance(500, 300, Image.SCALE_DEFAULT);
+		ImageIcon i2 = new ImageIcon(i3);
+		JLabel l15 = new JLabel(i2);
+		l15.setBounds(400, 30, 500, 370);
+		add(l15);
+
+		JLabel l10 = new JLabel("Add Rooms");
+		l10.setFont(new Font("Tahoma", Font.BOLD, 18));
+		l10.setBounds(194, 10, 120, 22);
+		contentPane.add(l10);
+
+		JLabel l1 = new JLabel("Room Number");
+		l1.setForeground(new Color(25, 25, 112));
+		l1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		l1.setBounds(64, 70, 102, 22);
+		contentPane.add(l1);
+
+		t4 = new JTextField();
+		t4.setBounds(174, 70, 156, 20);
+		contentPane.add(t4);
+
+		JLabel l2 = new JLabel("Availability");
+		l2.setForeground(new Color(25, 25, 112));
+		l2.setFont(new Font("Tahoma", Font.BOLD, 14));
+		l2.setBounds(64, 110, 102, 22);
+		contentPane.add(l2);
+
+		comboBox = new JComboBox(new String[] { "Available", "Occupied" });
+		comboBox.setBounds(176, 110, 154, 20);
+		contentPane.add(comboBox);
+
+		JLabel l3 = new JLabel("Cleaning Status");
+		l3.setForeground(new Color(25, 25, 112));
+		l3.setFont(new Font("Tahoma", Font.BOLD, 14));
+		l3.setBounds(64, 150, 102, 22);
+		contentPane.add(l3);
+
+		comboBox_2 = new JComboBox(new String[] { "Cleaned", "Dirty" });
+		comboBox_2.setBounds(176, 150, 154, 20);
+		contentPane.add(comboBox_2);
+
+		JLabel l4 = new JLabel("Price");
+		l4.setForeground(new Color(25, 25, 112));
+		l4.setFont(new Font("Tahoma", Font.BOLD, 14));
+		l4.setBounds(64, 190, 102, 22);
+		contentPane.add(l4);
+
+		t2 = new JTextField();
+		t2.setBounds(174, 190, 156, 20);
+		contentPane.add(t2);
+
+		JLabel l5 = new JLabel("Bed Type");
+		l5.setForeground(new Color(25, 25, 112));
+		l5.setFont(new Font("Tahoma", Font.BOLD, 14));
+		l5.setBounds(64, 230, 102, 22);
+		contentPane.add(l5);
+
+		comboBox_3 = new JComboBox(new String[] { "Single Bed", "Double Bed" });
+		comboBox_3.setBounds(176, 230, 154, 20);
+		contentPane.add(comboBox_3);
+
+		b1 = new JButton("Add");
+
+		b1.setBounds(64, 321, 111, 33);
+		b1.setBackground(Color.BLACK);
+		b1.setForeground(Color.WHITE);
+		contentPane.add(b1);
+
+		b1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				String l1 = t4.getText();
+				String l2 = comboBox.getSelectedItem().toString();
+				String l3 = comboBox_2.getSelectedItem().toString();
+				String l4 = t2.getText();
+				String l5 = comboBox_3.getSelectedItem().toString();
+				if (ae.getSource() == b1) {
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						System.out.println("Driver Connected....");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Hotel_db", "root",
+								"Deep@123");
+						System.out.println("Database connected.....");
+						st = con.createStatement();
+						String query = "insert into addRoom(room_no,Availability,Cleaning_Status,Price,Bed_Type) values('"
+								+ l1 + "','" + l2 + "','" + l3 + "','" + l4 + "','" + l5 + "')";
+						st.executeUpdate(query);
+						JOptionPane.showMessageDialog(null, "Room Added successfully!");
+					}
+
+					catch (Exception e) {
+						System.out.println("Problem: " + e);
+					}
+				}
+
+			}
+		});
+
+		b2 = new JButton("Back");
+		b2.setBounds(198, 321, 111, 33);
+		b2.setBackground(Color.BLACK);
+		b2.setForeground(Color.WHITE);
+		contentPane.add(b2);
+
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Dashboard().setVisible(true);
+				setVisible(false);
+			}
+		});
+
+		contentPane.setBackground(Color.WHITE);
+
+	}
+
+	public static void main(String[] args) {
+		new AddRoom().setVisible(true);
+	}
+}
