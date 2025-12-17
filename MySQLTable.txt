@@ -1,0 +1,47 @@
+
+create database Hotel_db;
+
+use Hotel_db;
+
+create table addRoom(
+room_no int not null,
+Availability varchar(100) not null,
+Cleaning_Status varchar(100) not null,
+Price int not null,
+Bed_Type varchar(100) not null
+);
+insert into addRoom(room_no,Availability,Cleaning_Status,Price,Bed_Type)
+values();
+select * from addRoom;
+
+create table addEmpl(
+name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    job VARCHAR(100) NOT NULL,
+    salary INT NOT NULL,
+
+    phone VARCHAR(15) NOT NULL,
+    aadhar VARCHAR(20) NOT NULL,
+    
+    email VARCHAR(100) NOT NULL
+);
+insert into addEmpl(name,age,gender,job,salary,phone,aadhar,email)
+values();
+select * from addEmpl;
+
+CREATE TABLE newcustomer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    
+    id_type VARCHAR(50) NOT NULL,      
+    id_number VARCHAR(50) NOT NULL,    
+    name VARCHAR(100) NOT NULL,        
+    gender VARCHAR(10) NOT NULL,       
+    country VARCHAR(100) NOT NULL,     
+    room_number VARCHAR(10) NOT NULL, 
+    checkin_status VARCHAR(50) NOT NULL,
+    deposit INT NOT NULL               
+);
+insert into newcustomer (id, id_type, id_number, name, gender, country, room_number, checkin_status, deposit)
+values();
+select * from newcustomer;
