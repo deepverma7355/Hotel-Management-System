@@ -3,6 +3,14 @@ create database Hotel_db;
 
 use Hotel_db;
 
+CREATE TABLE login (
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL
+);
+INSERT INTO login (username, password)
+VALUES ('admin', 'admin123');
+SELECT * FROM login;
+
 create table addRoom(
 room_no int not null,
 Availability varchar(100) not null,
@@ -45,3 +53,4 @@ CREATE TABLE newcustomer (
 insert into newcustomer (id, id_type, id_number, name, gender, country, room_number, checkin_status, deposit)
 values();
 select * from newcustomer;
+
